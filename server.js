@@ -1,5 +1,4 @@
 var express = require('express'),
-	http = require('http'),
 	restful = require('node-restful'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
@@ -8,7 +7,7 @@ var express = require('express'),
 				process.env.MONGOHQ_URL ||
 				'mongodb://localhost/restful';
 	mongoose = restful.mongoose;
-
+//Configuration
 var app = express();
 	app.use(bodyParser());
 	app.use(methodOverride());
@@ -19,16 +18,22 @@ mongoose.connect(uristring, function(err, res) {
 	else
 		console.log('Succeeded connected to: '+ uristring);
 });
-
-var ProductSchema = mongoose.Schema({
-	name: String,
-	sku: String,
-	price: Number
+//Schema Construction
+var UserSchema = mongoose.Schema({
+	name: {
+		first: String,
+		last: String
+	},
+	age: Number,
+	socialMedias {
+		facebookID: String,
+		twitterID: String
+	}
 });
 
-var Products = restful.model('products', ProductSchema);
-Products.methods(['get', 'put', 'post', 'delete']);
-Products.register(app, '/api/products');
+var Users = restful.model('users', UserSchema);
+Users.methods(['get','post', 'put', 'delete']);
+Users.register(app, '/api/users');
 
 app.listen(port, function() {
 	console.log('Server is running at port ' + port);
