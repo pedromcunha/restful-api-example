@@ -62,6 +62,7 @@ Registration.after('post', function(req, res, next){
 });
 
 function hash_password(req, res, next) {
+	console.log(req);
 	req.body.password = hash(req.body.password);
 	next();
 }
