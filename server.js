@@ -26,7 +26,7 @@ var UserSchema = mongoose.Schema({
 		last: String
 	},
 	age: Number,
-	socialMedias {
+	socialMedias: {
 		facebookID: String,
 		twitterID: String
 	}
