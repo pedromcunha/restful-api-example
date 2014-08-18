@@ -1,5 +1,6 @@
 var express = require('express'),
 	restful = require('node-restful'),
+	http = require('http'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
 	port = process.env.PORT || 3000,
