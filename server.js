@@ -26,24 +26,17 @@ mongoose.connect(uristring, function(err, res) {
 });
 //Schema Construction
 var UserSchema = mongoose.Schema({
-		name: {
-			first: String,
-			last: String
-		},
-		age: Number,
-		socialMedias: {
-			facebookID: String,
-			twitterID: String
-		}
-});
-var RegistrationSchema = mongoose.Schema({
-	name: {
-		first: String,
-		last: String
-	},
-	age: String,
-	username: String,
-	password: String
+		// name: {
+		// 	first: String,
+		// 	last: String
+		// },
+		// age: Number,
+		// socialMedias: {
+		// 	facebookID: String,
+		// 	twitterID: String
+		// }
+		"username": String,
+		"password": String
 });
 
 //Routes and Methods
