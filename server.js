@@ -11,7 +11,7 @@ var express = require('express'),
 	port = process.env.PORT || 3000,
 	uristring = process.env.MONGOLAB_URI ||
 				process.env.MONGOHQ_URL ||
-				'mongodb://localhost/restful';
+				'mongodb://localhost/restful',
 	mongoose = restful.mongoose;
 //Configuration
 var app = express();
@@ -50,13 +50,8 @@ var RegistrationSchema = mongoose.Schema({
 var Users = restful.model('users', UserSchema);
 Users.methods(['get','post', 'put', 'delete']);
 Users.register(app, '/api/users');
-
-
-var Registration = restful.model('register', RegistrationSchema);
-Registration.methods(['get', 'post']);
-Registration.register(app, '/api/register');
-Registration.before('post', hash_password);
-Registration.after('post', function(req, res, next){
+Users.before('post', hash_password);
+Users.after('post', function(req, res, next){
 	res.send('User Added');
 	next();
 });
