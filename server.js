@@ -26,15 +26,6 @@ mongoose.connect(uristring, function(err, res) {
 });
 //Schema Construction
 var UserSchema = mongoose.Schema({
-		// name: {
-		// 	first: String,
-		// 	last: String
-		// },
-		// age: Number,
-		// socialMedias: {
-		// 	facebookID: String,
-		// 	twitterID: String
-		// }
 		"username": String,
 		"password": String
 });
@@ -44,13 +35,8 @@ var Users = restful.model('users', UserSchema);
 Users.methods(['get','post', 'put', 'delete']);
 Users.register(app, '/api/users');
 Users.before('post', hash_password);
-Users.after('post', function(req, res, next){
-	res.send('User Added');
-	next();
-});
 
 function hash_password(req, res, next) {
-	console.log(req);
 	req.body.password = hash(req.body.password);
 	next();
 }
